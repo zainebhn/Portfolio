@@ -1,0 +1,19 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  html {scroll-behavior: smooth;}
+  body {
+    @apply bg-brand-bg text-purple-100;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-brand-surface backdrop-blur-md border border-purple-400/20 rounded-2xl;
+  }
+  .btn-primary {
+    @apply inline-block px-5 py-2 rounded-lg bg-brand-purple hover:bg-brand-purpleLight transition;
+  }
+}
