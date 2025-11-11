@@ -1,5 +1,6 @@
 import { FiSun, FiMoon } from "react-icons/fi";
 import useTheme from "../hooks/useTheme";
+import { motion } from "framer-motion";
 
 const links = ["home", "about",  "skills", "projects","experience", "contact"];
 

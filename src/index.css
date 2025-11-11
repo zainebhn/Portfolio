@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 @layer base {
   html {
@@ -8,6 +9,9 @@
   }
 
   body {
+
+     font-family: 'Inter', sans-serif;
+  font-feature-settings: "liga" 1;
     /* on retire bg-brand-bg pour laisser place au gradient animé */
     @apply text-purple-100;
     background: radial-gradient(ellipse at top, #2c1150 0%, #110e1b 70%);
@@ -25,23 +29,40 @@
 @layer components {
   .glass {
     @apply bg-brand-surface backdrop-blur-md border border-purple-400/20 rounded-2xl;
+    -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   }
   .btn-primary {
     @apply inline-block px-5 py-2 rounded-lg bg-brand-purple hover:bg-brand-purpleLight transition;
   }
 
   /* Particules ultra-légères (optionnel) */
-  .particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background-image: radial-gradient(#9333ea 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.15;
-    animation: pan 60s linear infinite;
-  }
-  @keyframes pan {
-    0%   { background-position: 0 0; }
-    100% { background-position: 1000px 1000px; }
-  }
+ 
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -10;
 }
+
+.bubble {
+  position: absolute;
+  bottom: -150px;
+  background: radial-gradient(circle, rgba(221, 214, 254, 0.8) 0%, transparent 50%);
+  border-radius: 50%;
+  animation: rise 18s infinite ease-in-out;
+}
+
+.bubble:nth-child(1) { width: 120px; height: 120px; left: 5%;  animation-duration: 16s; animation-delay: 0s; }
+.bubble:nth-child(2) { width: 180px; height: 180px; left: 25%; animation-duration: 20s; animation-delay: 2s; }
+.bubble:nth-child(3) { width: 100px; height: 100px; left: 45%; animation-duration: 14s; animation-delay: 4s; }
+.bubble:nth-child(4) { width: 150px; height: 150px; left: 65%; animation-duration: 19s; animation-delay: 1s; }
+.bubble:nth-child(5) { width: 130px; height: 130px; left: 85%; animation-duration: 17s; animation-delay: 3s; }
+
+@keyframes rise {
+  0%   { transform: translateY(0) scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-130vh) scale(0.7); opacity: 0; }
+}}

@@ -9,7 +9,16 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="bg-brand-bg text-purple-100">
+    <div className="bg-brand-bg text-purple-100 relative">
+      {/* Calque à bulles */}
+      <div className="particles -z-10 fixed inset-0 pointer-events-none">
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+      </div>
+
       <Navbar />
       <Hero />
       <About />
