@@ -28,7 +28,7 @@ export default function About() {
           I also enjoy writing clean code — from React front-ends to Spring Boot APIs.
         </p>
         <p>
-          Looking for a <strong>6-month internship starting February 2025</strong> to build
+          Looking for a <strong>6-month internship starting January 2026</strong> to build
           secure, observable and scalable systems.
         </p>
 
