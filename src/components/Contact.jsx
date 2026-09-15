@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaEnvelope, FaCopy, FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
+import { useLanguage } from "../hooks/useLanguage";
+
+const EMAIL = "heni.zeineb@gmail.com";
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
-  const handleMail = () => {
-    window.location.href = "mailto:heni.zeineb@gmail.com";      // essaie client mail
-    setTimeout(() => {
-      navigator.clipboard.writeText("heni.zeineb@gmail.com"); // fallback copie
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    }, 1000);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
   };
 
   return (
@@ -20,24 +25,28 @@ export default function Contact() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="glass p-8 space-y-6"
+        className="card p-8 space-y-6"
       >
-        <h2 className="text-3xl font-bold text-brand-purpleLight">Let’s connect</h2>
-        <p className="text-purple-200">Looking for a 6-month internship (Jan 2026)? Drop me a message.</p>
+        <h2 className="text-3xl font-bold text-brand-purpleLight">{t.contact.heading}</h2>
+        <p className="text-muted">{t.contact.text}</p>
 
-        <div className="flex justify-center gap-6 text-3xl">
-          {/* Bouton hybride */}
+        <div className="flex justify-center">
           <button
-            onClick={handleMail}
-            className="hover:text-brand-purple transition relative"
-            title="Email"
+            onClick={handleCopyEmail}
+            className="chip flex items-center gap-2 px-4 py-2 text-sm hover:-translate-y-0.5 transition relative"
           >
             {copied && (
-              <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-purple-800 px-2 py-1 rounded">Copied!</span>
+              <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-brand-purple text-white px-2 py-1 rounded whitespace-nowrap">
+                {t.contact.copied}
+              </span>
             )}
             <FaEnvelope />
+            {EMAIL}
+            <FaCopy className="text-muted" />
           </button>
+        </div>
 
+        <div className="flex justify-center gap-6 text-3xl">
           <a href="https://wa.me/21693840013" target="_blank" rel="noopener noreferrer" className="hover:text-brand-purple transition" title="WhatsApp">
             <FaWhatsapp />
           </a>
