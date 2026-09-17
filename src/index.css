@@ -113,4 +113,17 @@
     0%, 100% { transform: translate(0, 0) scale(1); }
     50%      { transform: translate(55px, -40px) scale(1.05); }
   }
+
+  /* Lignes "vivantes" du schéma PFE : pointillés qui défilent, comme un flux de données */
+  .flow-dash {
+    stroke-dasharray: 3, 2;
+    animation: flow-dash 1s linear infinite;
+  }
+  .flow-dash-slow {
+    stroke-dasharray: 1, 2;
+    animation: flow-dash 1.4s linear infinite;
+  }
+  @keyframes flow-dash {
+    to { stroke-dashoffset: -20; }
+  }
 }

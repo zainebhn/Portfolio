@@ -2,6 +2,7 @@ import { useLanguage } from "../hooks/useLanguage";
 import {
   FaCommentDots, FaRobot, FaCogs, FaCloudUploadAlt,
   FaServer, FaClock, FaDatabase, FaKey, FaExchangeAlt, FaBoxOpen, FaHdd,
+  FaBell, FaChartLine,
 } from "react-icons/fa";
 
 const FLOW_STYLE = [
@@ -40,10 +41,12 @@ export default function PfeDiagram() {
     { x: 35, y: 72, icon: FaServer, title: a.appService, accent: "border-blue-400/50", color: "text-blue-500" },
     { x: 65, y: 72, icon: FaClock, title: a.containerJob, accent: "border-amber-400/50", color: "text-amber-500" },
     { x: 95, y: 72, icon: FaDatabase, title: a.database, accent: "border-emerald-400/50", color: "text-emerald-500" },
-    { x: 135, y: 60, icon: FaKey, title: a.keyVault, accent: "border-violet-400/50", color: "text-violet-500" },
-    { x: 175, y: 60, icon: FaExchangeAlt, title: a.serviceBus, accent: "border-rose-400/50", color: "text-rose-500" },
-    { x: 135, y: 88, icon: FaBoxOpen, title: a.acr, accent: "border-cyan-400/50", color: "text-cyan-500" },
-    { x: 175, y: 88, icon: FaHdd, title: a.storage, accent: "border-slate-400/50", color: "text-slate-500" },
+    { x: 135, y: 50, icon: FaKey, title: a.keyVault, accent: "border-violet-400/50", color: "text-violet-500" },
+    { x: 175, y: 50, icon: FaExchangeAlt, title: a.serviceBus, accent: "border-rose-400/50", color: "text-rose-500" },
+    { x: 135, y: 70, icon: FaBell, title: a.communication, accent: "border-pink-400/50", color: "text-pink-500" },
+    { x: 175, y: 70, icon: FaHdd, title: a.storage, accent: "border-slate-400/50", color: "text-slate-500" },
+    { x: 135, y: 90, icon: FaBoxOpen, title: a.acr, accent: "border-cyan-400/50", color: "text-cyan-500" },
+    { x: 175, y: 90, icon: FaChartLine, title: a.monitoring, accent: "border-teal-400/50", color: "text-teal-500" },
   ];
 
   return (
@@ -77,14 +80,31 @@ export default function PfeDiagram() {
             <marker id="pfe-arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-emerald-400" />
             </marker>
+            <marker id="pfe-arrow-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3" markerHeight="3" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" className="fill-brand-ink/40" />
+            </marker>
           </defs>
           <g fill="none" strokeWidth="0.7">
-            <path d="M 40 15 L 59 15" className="stroke-sky-400/60" markerEnd="url(#pfe-arrow-sky)" />
-            <path d="M 90 15 L 109 15" className="stroke-violet-400/60" markerEnd="url(#pfe-arrow-violet)" />
-            <path d="M 140 15 L 159 15" className="stroke-amber-400/60" markerEnd="url(#pfe-arrow-amber)" />
-            <path d="M 122 22 Q 90 35 65 41" className="stroke-amber-400/50" strokeDasharray="2,2" markerEnd="url(#pfe-arrow-amber)" />
-            <path d="M 128 22 Q 150 32 155 41" className="stroke-amber-400/50" strokeDasharray="2,2" markerEnd="url(#pfe-arrow-amber)" />
-            <path d="M 178 22 Q 165 35 40 64" className="stroke-emerald-400/50" strokeDasharray="2,2" markerEnd="url(#pfe-arrow-emerald)" />
+            <path d="M 40 15 L 59 15" className="stroke-sky-400/60 flow-dash" markerEnd="url(#pfe-arrow-sky)" />
+            <path d="M 90 15 L 109 15" className="stroke-violet-400/60 flow-dash" markerEnd="url(#pfe-arrow-violet)" />
+            <path d="M 140 15 L 159 15" className="stroke-amber-400/60 flow-dash" markerEnd="url(#pfe-arrow-amber)" />
+            {/* Un seul connecteur : provisionner + déployer touchent tout l'environnement ci-dessous */}
+            <path d="M 100 23 L 100 37" strokeWidth="1" className="stroke-emerald-400/70 flow-dash" markerEnd="url(#pfe-arrow-emerald)" />
+          </g>
+
+          {/* Vraies dépendances entre ressources Azure, d'après le câblage des modules Terraform */}
+          <g fill="none" strokeWidth="0.45" className="stroke-brand-ink/30 flow-dash-slow" markerEnd="url(#pfe-arrow-muted)">
+            {/* ACR fournit les images Docker à App Service et au Container App Job */}
+            <path d="M 120 87 Q 75 82 50 76" />
+            <path d="M 122 84 Q 95 80 80 76" />
+            {/* Key Vault fournit secrets/URI à App Service */}
+            <path d="M 120 52 Q 75 58 50 70" />
+            {/* Service Bus : App Service s'y authentifie en direct (Managed Identity) */}
+            <path d="M 160 52 Q 90 55 50 64" />
+            {/* Service Bus déclenche Communication Services (backend -> notification -> envoi d'email) */}
+            <path d="M 168 56 Q 155 62 145 66" />
+            {/* Storage fournit le container blob utilisé par le batch */}
+            <path d="M 160 71 Q 110 74 80 74" />
           </g>
         </svg>
 
@@ -128,7 +148,7 @@ export default function PfeDiagram() {
           );
         })}
         <div className="flex flex-wrap gap-1.5 pt-1">
-          {[a.vnet, a.appService, a.containerJob, a.database, a.keyVault, a.serviceBus, a.acr, a.storage].map((s) => (
+          {[a.vnet, a.appService, a.containerJob, a.database, a.keyVault, a.serviceBus, a.acr, a.storage, a.communication, a.monitoring].map((s) => (
             <span key={s} className="chip text-[10px] px-2 py-0.5">{s}</span>
           ))}
         </div>

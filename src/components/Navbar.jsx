@@ -4,7 +4,7 @@ import { useLanguage } from "../hooks/useLanguage";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const linkIds = ["home", "about", "skills", "experience", "projects", "contact"];
+const linkIds = ["home", "about", "skills", "experience", "projects", "community", "contact"];
 
 export default function Navbar() {
   const [theme, setTheme] = useTheme();

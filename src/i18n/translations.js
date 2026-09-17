@@ -6,6 +6,7 @@ export const translations = {
       skills: "Skills",
       experience: "Experience",
       projects: "Projects",
+      community: "Community",
       contact: "Contact",
     },
     hero: {
@@ -54,7 +55,7 @@ export const translations = {
           },
           {
             title: "Deploy",
-            desc: "The GitLab pipeline deploys the application onto that infrastructure automatically.",
+            desc: "The GitLab pipeline deploys every service onto that infrastructure automatically, not just one app.",
           },
         ],
       },
@@ -68,6 +69,8 @@ export const translations = {
         serviceBus: "Service Bus",
         acr: "ACR",
         storage: "Storage",
+        communication: "Communication Services",
+        monitoring: "Monitoring",
       },
     },
     projects: {
@@ -78,6 +81,13 @@ export const translations = {
       codeLabel: "Code",
       repoPrivateLabel: "Repo (private)",
       liveLabel: "Live",
+    },
+    community: {
+      heading: "Community & Interests",
+      ieeeTitle: "IEEE, ESPRIT Student Branch",
+      ieeeDesc: "Active member of two IEEE chapters: Computer Society and Robotics and Automation Society (RAS). Through IEEE I attended TSYP11 and CS TAM 2.0; with RAS I competed in several robotics competitions, an early lesson in building things that actually have to work, on a deadline, in front of judges.",
+      interestsLabel: "Interests",
+      interests: ["Reading", "Photography", "Curiosity about everyday tech", "Research"],
     },
     contact: {
       heading: "Let's connect",
@@ -93,6 +103,7 @@ export const translations = {
       skills: "Compétences",
       experience: "Expérience",
       projects: "Projets",
+      community: "Communauté",
       contact: "Contact",
     },
     hero: {
@@ -141,7 +152,7 @@ export const translations = {
           },
           {
             title: "Déployer",
-            desc: "Le pipeline GitLab déploie automatiquement l'application sur cette infrastructure.",
+            desc: "Le pipeline GitLab déploie automatiquement chaque service sur cette infrastructure, pas seulement une appli.",
           },
         ],
       },
@@ -155,6 +166,8 @@ export const translations = {
         serviceBus: "Service Bus",
         acr: "ACR",
         storage: "Storage",
+        communication: "Communication Services",
+        monitoring: "Supervision",
       },
     },
     projects: {
@@ -165,6 +178,13 @@ export const translations = {
       codeLabel: "Code",
       repoPrivateLabel: "Dépôt (privé)",
       liveLabel: "Live",
+    },
+    community: {
+      heading: "Communauté & centres d'intérêt",
+      ieeeTitle: "IEEE, Student Branch ESPRIT",
+      ieeeDesc: "Membre actif de deux chapitres IEEE : Computer Society et Robotics and Automation Society (RAS). Grâce à IEEE, j'ai participé à TSYP11 et CS TAM 2.0 ; avec le RAS, j'ai pris part à plusieurs compétitions de robotique, une première leçon sur ce que ça veut dire construire quelque chose qui doit vraiment fonctionner, dans les délais, devant un jury.",
+      interestsLabel: "Centres d'intérêt",
+      interests: ["Lecture", "Photographie", "Curiosité pour la tech du quotidien", "Recherche"],
     },
     contact: {
       heading: "Discutons",
